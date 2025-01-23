@@ -1,8 +1,10 @@
 import "./styles/App.css";
 import Header from "./components/Header.tsx";
 import Form from "./components/Form.tsx";
-import Recipe from "./components/Recipe.tsx";
 import React, { useState } from "react";
+import Home from "./pages/Home.tsx";
+import Meal from "./pages/Meal.tsx";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 const App = () => {
   const [mealName, setMealName] = useState("");
@@ -15,6 +17,8 @@ const App = () => {
     area: "",
     category: "",
   });
+
+  const navigate = useNavigate();
 
   const getMealData = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,14 +35,18 @@ const App = () => {
       area: jsonData.meals[0].strArea,
       category: jsonData.meals[0].strCategory,
     });
+
+    navigate(`/meal/${jsonData.meals[0].idMeal}`);
   };
 
   return (
     <div>
       <Header />
       <Form setMealName={setMealName} getMealData={getMealData} />
-      <Recipe mealData={mealData} />
-      <h1>こんにちは</h1>
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/meal/:id" element={<Meal mealData={mealData} />} />
+      </Routes>
     </div>
   );
 };
