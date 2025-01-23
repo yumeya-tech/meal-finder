@@ -2,7 +2,7 @@ const Recipe = (props) => {
   return (
     <>
       {props.mealData.id && (
-        <div>
+        <div className="recipe">
           <h2>{props.mealData.name}</h2>
           <p>
             エリア<span>{props.mealData.area}</span>

@@ -1,5 +1,5 @@
 const Home = () => {
-  return <div>Homeページ</div>;
+  return <h3>今夜のレシピを見つけよう</h3>;
 };
 
 export default Home;

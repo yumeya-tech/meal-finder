@@ -1,10 +1,9 @@
 import "./styles/App.css";
-import Header from "./components/Header.tsx";
-import Form from "./components/Form.tsx";
 import React, { useState } from "react";
 import Home from "./pages/Home.tsx";
 import Meal from "./pages/Meal.tsx";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import Layout from "./layout";
 
 const App = () => {
   const [mealName, setMealName] = useState("");
@@ -41,11 +40,15 @@ const App = () => {
 
   return (
     <div>
-      <Header />
-      <Form setMealName={setMealName} getMealData={getMealData} />
       <Routes>
-        <Route index element={<Home />} />
-        <Route path="/meal/:id" element={<Meal mealData={mealData} />} />
+        <Route
+          element={
+            <Layout setMealName={setMealName} getMealData={getMealData} />
+          }
+        >
+          <Route index element={<Home />} />
+          <Route path="/meal/:id" element={<Meal mealData={mealData} />} />
+        </Route>
       </Routes>
     </div>
   );
